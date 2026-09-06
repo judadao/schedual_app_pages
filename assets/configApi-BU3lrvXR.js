@@ -1,0 +1,1 @@
+const s={all:"完整設定與班表",stores:"門市資訊","business-hours":"門市營業時間",rules:"驗證規則與排班政策","smart-shifts":"智慧排班允許班型",employees:"員工設定",shifts:"班型定義",requirements:"每週人力需求","daily-requirements":"指定日期人力需求",availability:"可排時間與休假","period-settings":"月份工時與營業設定",metrics:"工時報表調整",preferences:"介面偏好"};export{s as c};
