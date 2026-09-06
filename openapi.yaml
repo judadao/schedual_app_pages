@@ -12941,6 +12941,12 @@ paths:
                                               - target_minutes
                                               - minimum_minutes
                                               - maximum_minutes
+                                        coverage_start:
+                                          type: string
+                                        coverage_end:
+                                          type: string
+                                        missing_staff_minutes:
+                                          type: number
                                         acknowledged:
                                           anyOf:
                                             - type: boolean
@@ -14198,6 +14204,12 @@ paths:
                                           - target_minutes
                                           - minimum_minutes
                                           - maximum_minutes
+                                    coverage_start:
+                                      type: string
+                                    coverage_end:
+                                      type: string
+                                    missing_staff_minutes:
+                                      type: number
                                     acknowledged:
                                       anyOf:
                                         - type: boolean
