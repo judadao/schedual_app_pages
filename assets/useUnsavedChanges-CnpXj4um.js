@@ -1,0 +1,1 @@
+import{ac as s,t}from"./index-BWmKulWf.js";function f(r){const e=s(r);t.useEffect(()=>{e.state==="blocked"&&(window.confirm("尚有未儲存的修改，要放棄並離開嗎？")?e.proceed():e.reset())},[e]),t.useEffect(()=>{if(!r)return;const o=n=>{n.preventDefault(),n.returnValue=""};return window.addEventListener("beforeunload",o),()=>window.removeEventListener("beforeunload",o)},[r])}export{f as u};

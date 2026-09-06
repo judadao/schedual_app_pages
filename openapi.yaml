@@ -11088,32 +11088,39 @@ paths:
             type: string
       responses:
         "200":
-          description: Operation result
-          content:
-            application/json:
-              schema: {}
-        "400":
-          description: Rejected request; inspect detail/code. No successful write is implied.
+          description: Workspace with setup readiness
           content:
             application/json:
               schema:
                 type: object
+                required:
+                  - demo
+                  - store
+                  - periods
+                  - setup
                 properties:
-                  detail:
-                    type: string
-                  code:
-                    type: string
-        "409":
-          description: Rejected request; inspect detail/code. No successful write is implied.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  detail:
-                    type: string
-                  code:
-                    type: string
+                  demo:
+                    type: object
+                  store:
+                    type: object
+                  periods:
+                    type: array
+                    items:
+                      type: object
+                  setup:
+                    type: object
+                    required:
+                      - hasEmployees
+                      - hasShifts
+                      - hasRequirements
+                    properties:
+                      hasEmployees:
+                        type: boolean
+                      hasShifts:
+                        type: boolean
+                      hasRequirements:
+                        type: boolean
+                    description: Current store setup readiness, computed from the same snapshot as periods; read-only.
       tags:
         - saas-scheduling
       summary: workspace.read
@@ -15444,32 +15451,39 @@ paths:
       parameters: []
       responses:
         "200":
-          description: Operation result
-          content:
-            application/json:
-              schema: {}
-        "400":
-          description: Rejected request; inspect detail/code. No successful write is implied.
+          description: Workspace with setup readiness
           content:
             application/json:
               schema:
                 type: object
+                required:
+                  - demo
+                  - store
+                  - periods
+                  - setup
                 properties:
-                  detail:
-                    type: string
-                  code:
-                    type: string
-        "409":
-          description: Rejected request; inspect detail/code. No successful write is implied.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  detail:
-                    type: string
-                  code:
-                    type: string
+                  demo:
+                    type: object
+                  store:
+                    type: object
+                  periods:
+                    type: array
+                    items:
+                      type: object
+                  setup:
+                    type: object
+                    required:
+                      - hasEmployees
+                      - hasShifts
+                      - hasRequirements
+                    properties:
+                      hasEmployees:
+                        type: boolean
+                      hasShifts:
+                        type: boolean
+                      hasRequirements:
+                        type: boolean
+                    description: Current store setup readiness, computed from the same snapshot as periods; read-only.
       tags:
         - local
       summary: workspace.read
