@@ -3220,6 +3220,60 @@ paths:
       x-access: MANAGER
       x-workload: SHORT
       x-runtime: local
+  /api/schedule-periods/{periodId}/excel:
+    get:
+      operationId: local_GET__api_schedule_periods__periodId__excel
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Styled Excel workbook with current-roster label, coverage and employee summary
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - filename
+                  - content
+                  - mime
+                properties:
+                  filename:
+                    type: string
+                  content:
+                    type: array
+                    items:
+                      type: integer
+                      minimum: 0
+                      maximum: 255
+                  mime:
+                    type: string
+                    const: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: period.excel.read
+      description: "Access: MANAGER. Workload: SHORT.  Export the current saved monthly roster in any status, including empty
+        or invalid rosters. Reads one snapshot; does not publish, create a version, or modify data. Validation errors do
+        not block export. Returns the complete month regardless of UI filters. Unapplied previews and unsaved form edits
+        are excluded."
+      x-operation-name: period.excel.read
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
   /api/schedule-periods/{periodId}/generate:
     post:
       operationId: local_POST__api_schedule_periods__periodId__generate
@@ -7264,6 +7318,79 @@ paths:
       summary: period.editor.read
       description: "Access: MANAGER. Workload: SHORT. "
       x-operation-name: period.editor.read
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      security:
+        - sessionCookie: []
+  /api/scheduling/schedule-periods/{periodId}/excel:
+    get:
+      operationId: saas_scheduling_GET__api_scheduling_schedule_periods__periodId__excel
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Styled Excel workbook with current-roster label, coverage and employee summary
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - filename
+                  - content
+                  - mime
+                properties:
+                  filename:
+                    type: string
+                  content:
+                    type: array
+                    items:
+                      type: integer
+                      minimum: 0
+                      maximum: 255
+                  mime:
+                    type: string
+                    const: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: period.excel.read
+      description: "Access: MANAGER. Workload: SHORT.  Export the current saved monthly roster in any status, including empty
+        or invalid rosters. Reads one snapshot; does not publish, create a version, or modify data. Validation errors do
+        not block export. Returns the complete month regardless of UI filters. Unapplied previews and unsaved form edits
+        are excluded."
+      x-operation-name: period.excel.read
       x-access: MANAGER
       x-workload: SHORT
       x-runtime: saas-scheduling
