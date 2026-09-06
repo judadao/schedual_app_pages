@@ -3426,6 +3426,52 @@ paths:
                 - type: object
                 - type: array
               x-domain-validation: domain-use-case
+  /api/schedule-periods/{periodId}/main:
+    put:
+      operationId: local_PUT__api_schedule_periods__periodId__main
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: period.main.update
+      description: "Access: MANAGER. Workload: SHORT.  Select the monthly Main roster without publishing or changing
+        assignments. No request body is required; returns the selected Period with is_main=true."
+      x-operation-name: period.main.update
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
   /api/schedule-periods/{periodId}/metrics:
     get:
       operationId: local_GET__api_schedule_periods__periodId__metrics
@@ -7503,6 +7549,71 @@ paths:
                 - type: object
                 - type: array
               x-domain-validation: domain-use-case
+      security:
+        - sessionCookie: []
+  /api/scheduling/schedule-periods/{periodId}/main:
+    put:
+      operationId: saas_scheduling_PUT__api_scheduling_schedule_periods__periodId__main
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: period.main.update
+      description: "Access: MANAGER. Workload: SHORT.  Select the monthly Main roster without publishing or changing
+        assignments. No request body is required; returns the selected Period with is_main=true."
+      x-operation-name: period.main.update
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
       security:
         - sessionCookie: []
   /api/scheduling/schedule-periods/{periodId}/metrics:
@@ -12426,6 +12537,10 @@ paths:
                           items:
                             type: object
                             properties:
+                              is_main:
+                                anyOf:
+                                  - type: boolean
+                                  - type: boolean
                               name:
                                 type: string
                               is_current_publication:
@@ -13679,6 +13794,10 @@ paths:
                       items:
                         type: object
                         properties:
+                          is_main:
+                            anyOf:
+                              - type: boolean
+                              - type: boolean
                           name:
                             type: string
                           is_current_publication:
