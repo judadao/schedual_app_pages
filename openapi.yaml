@@ -12945,6 +12945,12 @@ paths:
                                           type: string
                                         coverage_end:
                                           type: string
+                                        nominal_required:
+                                          type: number
+                                        applied_rule_ids:
+                                          type: array
+                                          items:
+                                            type: string
                                         missing_staff_minutes:
                                           type: number
                                         acknowledged:
@@ -14208,6 +14214,12 @@ paths:
                                       type: string
                                     coverage_end:
                                       type: string
+                                    nominal_required:
+                                      type: number
+                                    applied_rule_ids:
+                                      type: array
+                                      items:
+                                        type: string
                                     missing_staff_minutes:
                                       type: number
                                     acknowledged:
