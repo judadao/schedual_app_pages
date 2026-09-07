@@ -4208,7 +4208,8 @@ paths:
       tags:
         - local
       summary: period.optimization-preview.apply
-      description: "Access: MANAGER. Workload: SHORT. "
+      description: "Access: MANAGER. Workload: SHORT.  Nonempty tradeOffLedger is rejected because rule trade-offs are
+        retired; regenerate the preview."
       x-operation-name: period.optimization-preview.apply
       x-access: MANAGER
       x-workload: SHORT
@@ -9099,7 +9100,8 @@ paths:
       tags:
         - saas-scheduling
       summary: period.optimization-preview.apply
-      description: "Access: MANAGER. Workload: SHORT. "
+      description: "Access: MANAGER. Workload: SHORT.  Nonempty tradeOffLedger is rejected because rule trade-offs are
+        retired; regenerate the preview."
       x-operation-name: period.optimization-preview.apply
       x-access: MANAGER
       x-workload: SHORT
@@ -11524,7 +11526,10 @@ paths:
       tags:
         - saas-scheduling
       summary: store.scheduling-rules.read
-      description: "Access: MANAGER. Workload: SHORT. "
+      description: "Access: MANAGER. Workload: SHORT.  Rule trade-off grants are retired. GET returns empty trade_off_grants,
+        trade_off_ledger and trade_off_validation_errors. PUT accepts an empty trade_off_grants array for cleanup,
+        rejects nonempty arrays, and continues to support normal enabled/enforcement/priority settings. Archived config
+        fields do not affect optimization."
       x-operation-name: store.scheduling-rules.read
       x-access: MANAGER
       x-workload: SHORT
@@ -11587,7 +11592,10 @@ paths:
       tags:
         - saas-scheduling
       summary: store.scheduling-rules.update
-      description: "Access: MANAGER. Workload: SHORT. "
+      description: "Access: MANAGER. Workload: SHORT.  Rule trade-off grants are retired. GET returns empty trade_off_grants,
+        trade_off_ledger and trade_off_validation_errors. PUT accepts an empty trade_off_grants array for cleanup,
+        rejects nonempty arrays, and continues to support normal enabled/enforcement/priority settings. Archived config
+        fields do not affect optimization."
       x-operation-name: store.scheduling-rules.update
       x-access: MANAGER
       x-workload: SHORT
@@ -11665,7 +11673,10 @@ paths:
       tags:
         - saas-scheduling
       summary: store.scheduling-rule.update
-      description: "Access: MANAGER. Workload: SHORT. "
+      description: "Access: MANAGER. Workload: SHORT.  Rule trade-off grants are retired. GET returns empty trade_off_grants,
+        trade_off_ledger and trade_off_validation_errors. PUT accepts an empty trade_off_grants array for cleanup,
+        rejects nonempty arrays, and continues to support normal enabled/enforcement/priority settings. Archived config
+        fields do not affect optimization."
       x-operation-name: store.scheduling-rule.update
       x-access: MANAGER
       x-workload: SHORT
@@ -16037,7 +16048,10 @@ paths:
       tags:
         - local
       summary: store.scheduling-rules.read
-      description: "Access: MANAGER. Workload: SHORT. "
+      description: "Access: MANAGER. Workload: SHORT.  Rule trade-off grants are retired. GET returns empty trade_off_grants,
+        trade_off_ledger and trade_off_validation_errors. PUT accepts an empty trade_off_grants array for cleanup,
+        rejects nonempty arrays, and continues to support normal enabled/enforcement/priority settings. Archived config
+        fields do not affect optimization."
       x-operation-name: store.scheduling-rules.read
       x-access: MANAGER
       x-workload: SHORT
@@ -16081,7 +16095,10 @@ paths:
       tags:
         - local
       summary: store.scheduling-rules.update
-      description: "Access: MANAGER. Workload: SHORT. "
+      description: "Access: MANAGER. Workload: SHORT.  Rule trade-off grants are retired. GET returns empty trade_off_grants,
+        trade_off_ledger and trade_off_validation_errors. PUT accepts an empty trade_off_grants array for cleanup,
+        rejects nonempty arrays, and continues to support normal enabled/enforcement/priority settings. Archived config
+        fields do not affect optimization."
       x-operation-name: store.scheduling-rules.update
       x-access: MANAGER
       x-workload: SHORT
@@ -16140,7 +16157,10 @@ paths:
       tags:
         - local
       summary: store.scheduling-rule.update
-      description: "Access: MANAGER. Workload: SHORT. "
+      description: "Access: MANAGER. Workload: SHORT.  Rule trade-off grants are retired. GET returns empty trade_off_grants,
+        trade_off_ledger and trade_off_validation_errors. PUT accepts an empty trade_off_grants array for cleanup,
+        rejects nonempty arrays, and continues to support normal enabled/enforcement/priority settings. Archived config
+        fields do not affect optimization."
       x-operation-name: store.scheduling-rule.update
       x-access: MANAGER
       x-workload: SHORT
