@@ -3012,6 +3012,141 @@ paths:
           text/csv:
             schema:
               type: string
+  /api/schedule-periods/{periodId}/daily-group-limits:
+    get:
+      operationId: local_GET__api_schedule_periods__periodId__daily_group_limits
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: period.daily-group-limits.read
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.daily-group-limits.read
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
+    put:
+      operationId: local_PUT__api_schedule_periods__periodId__daily_group_limits
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: period.daily-group-limits.update
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.daily-group-limits.update
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+              type: object
+              required:
+                - limits
+              properties:
+                limits:
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    A:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                    B:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                    C:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                    AB:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                    BC:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                    AC:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                    ABC:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                  description: Per-period hard daily combination caps. Omitted groups are unlimited; zero disallows that combination.
   /api/schedule-periods/{periodId}/day-statuses:
     put:
       operationId: local_PUT__api_schedule_periods__periodId__day_statuses
@@ -7350,6 +7485,179 @@ paths:
           text/csv:
             schema:
               type: string
+      security:
+        - sessionCookie: []
+  /api/scheduling/schedule-periods/{periodId}/daily-group-limits:
+    get:
+      operationId: saas_scheduling_GET__api_scheduling_schedule_periods__periodId__daily_group_limits
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: period.daily-group-limits.read
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.daily-group-limits.read
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      security:
+        - sessionCookie: []
+    put:
+      operationId: saas_scheduling_PUT__api_scheduling_schedule_periods__periodId__daily_group_limits
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: period.daily-group-limits.update
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.daily-group-limits.update
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+              type: object
+              required:
+                - limits
+              properties:
+                limits:
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    A:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                    B:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                    C:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                    AB:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                    BC:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                    AC:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                    ABC:
+                      type: integer
+                      minimum: 0
+                      maximum: 50
+                  description: Per-period hard daily combination caps. Omitted groups are unlimited; zero disallows that combination.
       security:
         - sessionCookie: []
   /api/scheduling/schedule-periods/{periodId}/day-statuses:
@@ -13392,6 +13700,8 @@ paths:
                           items:
                             type: object
                             properties:
+                              daily_group_limits:
+                                type: object
                               employee_display_order:
                                 type: array
                                 items:
@@ -13782,6 +14092,8 @@ paths:
                                   - type: "null"
                                   - type: object
                                     properties:
+                                      daily_group_limits:
+                                        type: object
                                       assignments:
                                         type: array
                                         items:
@@ -14665,6 +14977,8 @@ paths:
                       items:
                         type: object
                         properties:
+                          daily_group_limits:
+                            type: object
                           employee_display_order:
                             type: array
                             items:
@@ -15055,6 +15369,8 @@ paths:
                               - type: "null"
                               - type: object
                                 properties:
+                                  daily_group_limits:
+                                    type: object
                                   assignments:
                                     type: array
                                     items:
