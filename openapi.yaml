@@ -3175,6 +3175,319 @@ paths:
                 - type: object
                 - type: array
               x-domain-validation: domain-use-case
+  /api/schedule-periods/{periodId}/display-order:
+    get:
+      operationId: local_GET__api_schedule_periods__periodId__display_order
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: period.display-order.read
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.display-order.read
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
+    put:
+      operationId: local_PUT__api_schedule_periods__periodId__display_order
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: period.display-order.update
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.display-order.update
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+              type: object
+              required:
+                - employee_ids
+              properties:
+                employee_ids:
+                  type: array
+                  uniqueItems: true
+                  items:
+                    type: integer
+                    minimum: 1
+                  description: Same-store employee IDs in display order; omitted employees follow their normal order.
+  /api/schedule-periods/{periodId}/editing:
+    get:
+      operationId: local_GET__api_schedule_periods__periodId__editing
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: period.editing.read
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.editing.read
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
+    put:
+      operationId: local_PUT__api_schedule_periods__periodId__editing
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: period.editing.update
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.editing.update
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+              type: object
+              required:
+                - expectedFingerprint
+              properties:
+                expectedFingerprint:
+                  type: string
+                snapshot:
+                  type: object
+                  description: Editable period fields, availability and daily requirements; publication and employee identity excluded.
+                operations:
+                  type: array
+                  maxItems: 250
+                  items:
+                    type: object
+                    required:
+                      - path
+                      - method
+                    properties:
+                      path:
+                        type: string
+                      method:
+                        enum:
+                          - POST
+                          - PUT
+                          - DELETE
+                      body: {}
+  /api/schedule-periods/{periodId}/editing/preview:
+    post:
+      operationId: local_POST__api_schedule_periods__periodId__editing_preview
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: period.editing.preview
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.editing.preview
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+              type: object
+              required:
+                - expectedFingerprint
+              properties:
+                expectedFingerprint:
+                  type: string
+                snapshot:
+                  type: object
+                  description: Editable period fields, availability and daily requirements; publication and employee identity excluded.
+                operations:
+                  type: array
+                  maxItems: 250
+                  items:
+                    type: object
+                    required:
+                      - path
+                      - method
+                    properties:
+                      path:
+                        type: string
+                      method:
+                        enum:
+                          - POST
+                          - PUT
+                          - DELETE
+                      body: {}
   /api/schedule-periods/{periodId}/editor:
     get:
       operationId: local_GET__api_schedule_periods__periodId__editor
@@ -7257,6 +7570,414 @@ paths:
                 - type: object
                 - type: array
               x-domain-validation: domain-use-case
+      security:
+        - sessionCookie: []
+  /api/scheduling/schedule-periods/{periodId}/display-order:
+    get:
+      operationId: saas_scheduling_GET__api_scheduling_schedule_periods__periodId__display_order
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: period.display-order.read
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.display-order.read
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      security:
+        - sessionCookie: []
+    put:
+      operationId: saas_scheduling_PUT__api_scheduling_schedule_periods__periodId__display_order
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: period.display-order.update
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.display-order.update
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+              type: object
+              required:
+                - employee_ids
+              properties:
+                employee_ids:
+                  type: array
+                  uniqueItems: true
+                  items:
+                    type: integer
+                    minimum: 1
+                  description: Same-store employee IDs in display order; omitted employees follow their normal order.
+      security:
+        - sessionCookie: []
+  /api/scheduling/schedule-periods/{periodId}/editing:
+    get:
+      operationId: saas_scheduling_GET__api_scheduling_schedule_periods__periodId__editing
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: period.editing.read
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.editing.read
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      security:
+        - sessionCookie: []
+    put:
+      operationId: saas_scheduling_PUT__api_scheduling_schedule_periods__periodId__editing
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: period.editing.update
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.editing.update
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+              type: object
+              required:
+                - expectedFingerprint
+              properties:
+                expectedFingerprint:
+                  type: string
+                snapshot:
+                  type: object
+                  description: Editable period fields, availability and daily requirements; publication and employee identity excluded.
+                operations:
+                  type: array
+                  maxItems: 250
+                  items:
+                    type: object
+                    required:
+                      - path
+                      - method
+                    properties:
+                      path:
+                        type: string
+                      method:
+                        enum:
+                          - POST
+                          - PUT
+                          - DELETE
+                      body: {}
+      security:
+        - sessionCookie: []
+  /api/scheduling/schedule-periods/{periodId}/editing/preview:
+    post:
+      operationId: saas_scheduling_POST__api_scheduling_schedule_periods__periodId__editing_preview
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: period.editing.preview
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.editing.preview
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+              type: object
+              required:
+                - expectedFingerprint
+              properties:
+                expectedFingerprint:
+                  type: string
+                snapshot:
+                  type: object
+                  description: Editable period fields, availability and daily requirements; publication and employee identity excluded.
+                operations:
+                  type: array
+                  maxItems: 250
+                  items:
+                    type: object
+                    required:
+                      - path
+                      - method
+                    properties:
+                      path:
+                        type: string
+                      method:
+                        enum:
+                          - POST
+                          - PUT
+                          - DELETE
+                      body: {}
       security:
         - sessionCookie: []
   /api/scheduling/schedule-periods/{periodId}/editor:
@@ -12671,6 +13392,10 @@ paths:
                           items:
                             type: object
                             properties:
+                              employee_display_order:
+                                type: array
+                                items:
+                                  type: number
                               is_main:
                                 anyOf:
                                   - type: boolean
@@ -13940,6 +14665,10 @@ paths:
                       items:
                         type: object
                         properties:
+                          employee_display_order:
+                            type: array
+                            items:
+                              type: number
                           is_main:
                             anyOf:
                               - type: boolean
