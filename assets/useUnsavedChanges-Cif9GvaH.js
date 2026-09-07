@@ -1,0 +1,1 @@
+import{ad as s,u as t}from"./index-C411xKwI.js";function a(r){const e=s(r);t.useEffect(()=>{e.state==="blocked"&&(window.confirm("尚有未儲存的修改，要放棄並離開嗎？")?e.proceed():e.reset())},[e]),t.useEffect(()=>{if(!r)return;const o=n=>{n.preventDefault(),n.returnValue=""};return window.addEventListener("beforeunload",o),()=>window.removeEventListener("beforeunload",o)},[r])}export{a as u};
