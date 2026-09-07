@@ -11469,6 +11469,70 @@ paths:
               type: string
       security:
         - sessionCookie: []
+  /api/scheduling/stores/{storeId}/scheduling-rule-templates:
+    get:
+      operationId: saas_scheduling_GET__api_scheduling_stores__storeId__scheduling_rule_templates
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: store.rule-templates.read
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: store.rule-templates.read
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      security:
+        - sessionCookie: []
   /api/scheduling/stores/{storeId}/scheduling-rules:
     get:
       operationId: saas_scheduling_GET__api_scheduling_stores__storeId__scheduling_rules
@@ -13193,6 +13257,42 @@ paths:
                               scheduling_policy:
                                 type: object
                                 properties:
+                                  custom_rules:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        rule_id:
+                                          type: string
+                                        kind:
+                                          anyOf:
+                                            - type: string
+                                              const: PART_TIME_AC
+                                            - type: string
+                                              const: PART_TIME_SATURDAY_AB
+                                            - type: string
+                                              const: SATURDAY_PATTERN
+                                            - type: string
+                                              const: PEER_COMPOSITE
+                                            - type: string
+                                              const: PEER_REST
+                                            - type: string
+                                              const: PEER_OVERTIME
+                                            - type: string
+                                              const: SEQUENCE
+                                        maximum_difference:
+                                          type: number
+                                        enforcement:
+                                          anyOf:
+                                            - type: string
+                                              const: HARD
+                                            - type: string
+                                              const: PREFERRED
+                                        priority:
+                                          type: number
+                                      required:
+                                        - rule_id
+                                        - kind
                                   group_limits:
                                     type: array
                                     items:
@@ -14470,6 +14570,42 @@ paths:
                           scheduling_policy:
                             type: object
                             properties:
+                              custom_rules:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    rule_id:
+                                      type: string
+                                    kind:
+                                      anyOf:
+                                        - type: string
+                                          const: PART_TIME_AC
+                                        - type: string
+                                          const: PART_TIME_SATURDAY_AB
+                                        - type: string
+                                          const: SATURDAY_PATTERN
+                                        - type: string
+                                          const: PEER_COMPOSITE
+                                        - type: string
+                                          const: PEER_REST
+                                        - type: string
+                                          const: PEER_OVERTIME
+                                        - type: string
+                                          const: SEQUENCE
+                                    maximum_difference:
+                                      type: number
+                                    enforcement:
+                                      anyOf:
+                                        - type: string
+                                          const: HARD
+                                        - type: string
+                                          const: PREFERRED
+                                    priority:
+                                      type: number
+                                  required:
+                                    - rule_id
+                                    - kind
                               group_limits:
                                 type: array
                                 items:
@@ -16008,6 +16144,51 @@ paths:
           text/csv:
             schema:
               type: string
+  /api/stores/{storeId}/scheduling-rule-templates:
+    get:
+      operationId: local_GET__api_stores__storeId__scheduling_rule_templates
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: store.rule-templates.read
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: store.rule-templates.read
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
   /api/stores/{storeId}/scheduling-rules:
     get:
       operationId: local_GET__api_stores__storeId__scheduling_rules
