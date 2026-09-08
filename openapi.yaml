@@ -4367,6 +4367,124 @@ paths:
       x-access: MANAGER
       x-workload: SHORT
       x-runtime: local
+  /api/schedule-periods/{periodId}/pinned-cells:
+    get:
+      operationId: local_GET__api_schedule_periods__periodId__pinned_cells
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: period.pinned-cells.read
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.pinned-cells.read
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
+    put:
+      operationId: local_PUT__api_schedule_periods__periodId__pinned_cells
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: period.pinned-cells.update
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.pinned-cells.update
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+              type: object
+              required:
+                - cells
+              properties:
+                cells:
+                  type: array
+                  uniqueItems: true
+                  items:
+                    type: object
+                    additionalProperties: false
+                    required:
+                      - employee_id
+                      - date
+                    properties:
+                      employee_id:
+                        type: integer
+                        minimum: 1
+                      date:
+                        type: string
+                        format: date
   /api/schedule-periods/{periodId}/publish:
     post:
       operationId: local_POST__api_schedule_periods__periodId__publish
@@ -9318,6 +9436,162 @@ paths:
       x-runtime: saas-scheduling
       security:
         - sessionCookie: []
+  /api/scheduling/schedule-periods/{periodId}/pinned-cells:
+    get:
+      operationId: saas_scheduling_GET__api_scheduling_schedule_periods__periodId__pinned_cells
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: period.pinned-cells.read
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.pinned-cells.read
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      security:
+        - sessionCookie: []
+    put:
+      operationId: saas_scheduling_PUT__api_scheduling_schedule_periods__periodId__pinned_cells
+      parameters:
+        - name: periodId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: period.pinned-cells.update
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: period.pinned-cells.update
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+              type: object
+              required:
+                - cells
+              properties:
+                cells:
+                  type: array
+                  uniqueItems: true
+                  items:
+                    type: object
+                    additionalProperties: false
+                    required:
+                      - employee_id
+                      - date
+                    properties:
+                      employee_id:
+                        type: integer
+                        minimum: 1
+                      date:
+                        type: string
+                        format: date
+      security:
+        - sessionCookie: []
   /api/scheduling/schedule-periods/{periodId}/publish:
     post:
       operationId: saas_scheduling_POST__api_scheduling_schedule_periods__periodId__publish
@@ -13299,6 +13573,8 @@ paths:
                                             - type: string
                                               const: PEER_OVERTIME
                                             - type: string
+                                              const: PEER_ALLOWANCE
+                                            - type: string
                                               const: SEQUENCE
                                             - type: string
                                               const: CONTINUITY_MINIMUM_STAFF
@@ -13843,6 +14119,18 @@ paths:
                           items:
                             type: object
                             properties:
+                              pinned_cells:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    employee_id:
+                                      type: number
+                                    date:
+                                      type: string
+                                  required:
+                                    - employee_id
+                                    - date
                               daily_group_limits:
                                 type: object
                               employee_display_order:
@@ -14235,6 +14523,18 @@ paths:
                                   - type: "null"
                                   - type: object
                                     properties:
+                                      pinned_cells:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            employee_id:
+                                              type: number
+                                            date:
+                                              type: string
+                                          required:
+                                            - employee_id
+                                            - date
                                       daily_group_limits:
                                         type: object
                                       assignments:
@@ -14623,6 +14923,8 @@ paths:
                                           const: PEER_REST
                                         - type: string
                                           const: PEER_OVERTIME
+                                        - type: string
+                                          const: PEER_ALLOWANCE
                                         - type: string
                                           const: SEQUENCE
                                         - type: string
@@ -15168,6 +15470,18 @@ paths:
                       items:
                         type: object
                         properties:
+                          pinned_cells:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                employee_id:
+                                  type: number
+                                date:
+                                  type: string
+                              required:
+                                - employee_id
+                                - date
                           daily_group_limits:
                             type: object
                           employee_display_order:
@@ -15560,6 +15874,18 @@ paths:
                               - type: "null"
                               - type: object
                                 properties:
+                                  pinned_cells:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        employee_id:
+                                          type: number
+                                        date:
+                                          type: string
+                                      required:
+                                        - employee_id
+                                        - date
                                   daily_group_limits:
                                     type: object
                                   assignments:
