@@ -11592,8 +11592,8 @@ paths:
       summary: store.scheduling-rules.read
       description: "Access: MANAGER. Workload: SHORT.  Rule trade-off grants are retired. GET returns empty trade_off_grants,
         trade_off_ledger and trade_off_validation_errors. PUT accepts an empty trade_off_grants array for cleanup,
-        rejects nonempty arrays, and continues to support normal enabled/enforcement/priority settings. Archived config
-        fields do not affect optimization."
+        rejects nonempty arrays, and supports enabled/enforcement/priority settings. The policy.continuity-minimum-three
+        rule also accepts minimum_staff from 1 to 50. Archived config fields do not affect optimization."
       x-operation-name: store.scheduling-rules.read
       x-access: MANAGER
       x-workload: SHORT
@@ -11658,8 +11658,8 @@ paths:
       summary: store.scheduling-rules.update
       description: "Access: MANAGER. Workload: SHORT.  Rule trade-off grants are retired. GET returns empty trade_off_grants,
         trade_off_ledger and trade_off_validation_errors. PUT accepts an empty trade_off_grants array for cleanup,
-        rejects nonempty arrays, and continues to support normal enabled/enforcement/priority settings. Archived config
-        fields do not affect optimization."
+        rejects nonempty arrays, and supports enabled/enforcement/priority settings. The policy.continuity-minimum-three
+        rule also accepts minimum_staff from 1 to 50. Archived config fields do not affect optimization."
       x-operation-name: store.scheduling-rules.update
       x-access: MANAGER
       x-workload: SHORT
@@ -11739,8 +11739,8 @@ paths:
       summary: store.scheduling-rule.update
       description: "Access: MANAGER. Workload: SHORT.  Rule trade-off grants are retired. GET returns empty trade_off_grants,
         trade_off_ledger and trade_off_validation_errors. PUT accepts an empty trade_off_grants array for cleanup,
-        rejects nonempty arrays, and continues to support normal enabled/enforcement/priority settings. Archived config
-        fields do not affect optimization."
+        rejects nonempty arrays, and supports enabled/enforcement/priority settings. The policy.continuity-minimum-three
+        rule also accepts minimum_staff from 1 to 50. Archived config fields do not affect optimization."
       x-operation-name: store.scheduling-rule.update
       x-access: MANAGER
       x-workload: SHORT
@@ -11754,6 +11754,26 @@ paths:
                 - type: object
                 - type: array
               x-domain-validation: domain-use-case
+              type: object
+              minProperties: 1
+              maxProperties: 1
+              properties:
+                enabled:
+                  type: boolean
+                enforcement:
+                  type: string
+                  enum:
+                    - HARD
+                    - SOFT
+                priority:
+                  type: integer
+                  minimum: 1
+                  maximum: 10
+                minimum_staff:
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+                  description: On-duty threshold for policy.continuity-minimum-three; default 3.
       security:
         - sessionCookie: []
   /api/scheduling/stores/{storeId}/shift-templates:
@@ -13280,8 +13300,20 @@ paths:
                                               const: PEER_OVERTIME
                                             - type: string
                                               const: SEQUENCE
+                                            - type: string
+                                              const: CONTINUITY_MINIMUM_STAFF
                                         maximum_difference:
                                           type: number
+                                        minimum_staff:
+                                          type: number
+                                        employment_types:
+                                          type: array
+                                          items:
+                                            anyOf:
+                                              - type: string
+                                                const: FULL_TIME
+                                              - type: string
+                                                const: HALF_TIME
                                         enforcement:
                                           anyOf:
                                             - type: string
@@ -14593,8 +14625,20 @@ paths:
                                           const: PEER_OVERTIME
                                         - type: string
                                           const: SEQUENCE
+                                        - type: string
+                                          const: CONTINUITY_MINIMUM_STAFF
                                     maximum_difference:
                                       type: number
+                                    minimum_staff:
+                                      type: number
+                                    employment_types:
+                                      type: array
+                                      items:
+                                        anyOf:
+                                          - type: string
+                                            const: FULL_TIME
+                                          - type: string
+                                            const: HALF_TIME
                                     enforcement:
                                       anyOf:
                                         - type: string
@@ -16231,8 +16275,8 @@ paths:
       summary: store.scheduling-rules.read
       description: "Access: MANAGER. Workload: SHORT.  Rule trade-off grants are retired. GET returns empty trade_off_grants,
         trade_off_ledger and trade_off_validation_errors. PUT accepts an empty trade_off_grants array for cleanup,
-        rejects nonempty arrays, and continues to support normal enabled/enforcement/priority settings. Archived config
-        fields do not affect optimization."
+        rejects nonempty arrays, and supports enabled/enforcement/priority settings. The policy.continuity-minimum-three
+        rule also accepts minimum_staff from 1 to 50. Archived config fields do not affect optimization."
       x-operation-name: store.scheduling-rules.read
       x-access: MANAGER
       x-workload: SHORT
@@ -16278,8 +16322,8 @@ paths:
       summary: store.scheduling-rules.update
       description: "Access: MANAGER. Workload: SHORT.  Rule trade-off grants are retired. GET returns empty trade_off_grants,
         trade_off_ledger and trade_off_validation_errors. PUT accepts an empty trade_off_grants array for cleanup,
-        rejects nonempty arrays, and continues to support normal enabled/enforcement/priority settings. Archived config
-        fields do not affect optimization."
+        rejects nonempty arrays, and supports enabled/enforcement/priority settings. The policy.continuity-minimum-three
+        rule also accepts minimum_staff from 1 to 50. Archived config fields do not affect optimization."
       x-operation-name: store.scheduling-rules.update
       x-access: MANAGER
       x-workload: SHORT
@@ -16340,8 +16384,8 @@ paths:
       summary: store.scheduling-rule.update
       description: "Access: MANAGER. Workload: SHORT.  Rule trade-off grants are retired. GET returns empty trade_off_grants,
         trade_off_ledger and trade_off_validation_errors. PUT accepts an empty trade_off_grants array for cleanup,
-        rejects nonempty arrays, and continues to support normal enabled/enforcement/priority settings. Archived config
-        fields do not affect optimization."
+        rejects nonempty arrays, and supports enabled/enforcement/priority settings. The policy.continuity-minimum-three
+        rule also accepts minimum_staff from 1 to 50. Archived config fields do not affect optimization."
       x-operation-name: store.scheduling-rule.update
       x-access: MANAGER
       x-workload: SHORT
@@ -16355,6 +16399,26 @@ paths:
                 - type: object
                 - type: array
               x-domain-validation: domain-use-case
+              type: object
+              minProperties: 1
+              maxProperties: 1
+              properties:
+                enabled:
+                  type: boolean
+                enforcement:
+                  type: string
+                  enum:
+                    - HARD
+                    - SOFT
+                priority:
+                  type: integer
+                  minimum: 1
+                  maximum: 10
+                minimum_staff:
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+                  description: On-duty threshold for policy.continuity-minimum-three; default 3.
   /api/stores/{storeId}/share-links:
     get:
       operationId: saas_GET__api_stores__storeId__share_links
