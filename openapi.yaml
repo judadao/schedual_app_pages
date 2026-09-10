@@ -2195,6 +2195,33 @@ paths:
       x-source: apps/api/src/server.ts
       security:
         - sessionCookie: []
+  /api/me/email-deliveries:
+    get:
+      operationId: saas_GET__api_me_email_deliveries
+      parameters: []
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+        "401":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas
+      summary: GET /api/me/email-deliveries
+      x-source: apps/api/src/routes/operationsRoutes.ts
+      security:
+        - sessionCookie: []
   /api/me/email-verification:
     post:
       operationId: saas_POST__api_me_email_verification
@@ -2342,6 +2369,195 @@ paths:
       x-source: apps/api/src/server.ts
       security: []
       x-runtime: local or saas
+  /api/organizations/{organizationId}/audit:
+    get:
+      operationId: saas_GET__api_organizations__organizationId__audit
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: actor
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: event
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: from
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: to
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: store
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+        "401":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas
+      summary: GET /api/organizations/:organizationId/audit
+      x-source: apps/api/src/routes/operationsRoutes.ts
+      security:
+        - sessionCookie: []
+  /api/organizations/{organizationId}/members:
+    get:
+      operationId: saas_GET__api_organizations__organizationId__members
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+        "401":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas
+      summary: GET /api/organizations/:organizationId/members
+      x-source: apps/api/src/routes/operationsRoutes.ts
+      security:
+        - sessionCookie: []
+    put:
+      operationId: saas_PUT__api_organizations__organizationId__members
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+        "204":
+          description: Completed; no response body
+        "401":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas
+      summary: PUT /api/organizations/:organizationId/members
+      x-source: apps/api/src/routes/operationsRoutes.ts
+      security:
+        - sessionCookie: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                role:
+                  anyOf:
+                    - type: string
+                      const: MANAGER
+                    - type: string
+                      const: EMPLOYEE
+                store_ids:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - email
+                - role
+                - store_ids
+  /api/organizations/{organizationId}/members/{userId}:
+    delete:
+      operationId: saas_DELETE__api_organizations__organizationId__members__userId_
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+        "204":
+          description: Completed; no response body
+        "401":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas
+      summary: DELETE /api/organizations/:organizationId/members/:userId
+      x-source: apps/api/src/routes/operationsRoutes.ts
+      security:
+        - sessionCookie: []
   /api/organizations/{organizationId}/stores:
     get:
       operationId: saas_GET__api_organizations__organizationId__stores
@@ -2383,6 +2599,86 @@ paths:
         - saas
       summary: GET /api/organizations/:organizationId/stores
       x-source: apps/api/src/routes/schedulingRoutes.ts
+      security:
+        - sessionCookie: []
+  /api/organizations/{organizationId}/transfer-owner:
+    post:
+      operationId: saas_POST__api_organizations__organizationId__transfer_owner
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+        "204":
+          description: Completed; no response body
+        "401":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas
+      summary: POST /api/organizations/:organizationId/transfer-owner
+      x-source: apps/api/src/routes/operationsRoutes.ts
+      security:
+        - sessionCookie: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                confirmation:
+                  type: string
+              required:
+                - user_id
+                - confirmation
+  /api/organizations/{organizationId}/usage:
+    get:
+      operationId: saas_GET__api_organizations__organizationId__usage
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+        "401":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas
+      summary: GET /api/organizations/:organizationId/usage
+      x-source: apps/api/src/routes/operationsRoutes.ts
       security:
         - sessionCookie: []
   /api/public/schedules/{token}:
