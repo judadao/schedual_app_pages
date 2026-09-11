@@ -1,0 +1,1 @@
+import{aP as o,ac as e,aj as n}from"./index-p1cozNdx.js";function r(){const t=o().state?.returnTo;return typeof t=="string"&&/^\/schedule\/[1-9]\d*(?:\?[^\\]*)?$/.test(t)?e.jsx(n,{className:"btn-secondary mb-4",to:t,children:"回到原班表位置"}):null}export{r as R};
