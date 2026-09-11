@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "version": "0.31.0",
-  "buildId": "a4aa7c1b-4661-42e6-83ce-25c05bbe603d",
-  "revision": "95572e8edae9",
-  "generatedAt": "2026-09-11T12:25:31.543Z",
+  "version": "0.31.1",
+  "buildId": "723d82e9-7e0e-43cf-9a60-10a68da5e56c",
+  "revision": "d68562acbe45",
+  "generatedAt": "2026-09-11T12:31:59.728Z",
   "fullPwa": {
     "status": "available",
     "url": "/schedual_app_pages/app/"
