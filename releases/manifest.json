@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "version": "0.31.0",
+  "buildId": "a4aa7c1b-4661-42e6-83ce-25c05bbe603d",
+  "revision": "95572e8edae9",
+  "generatedAt": "2026-09-11T12:25:31.543Z",
+  "fullPwa": {
+    "status": "available",
+    "url": "/schedual_app_pages/app/"
+  },
+  "platforms": {
+    "windows": {
+      "kind": "pwa",
+      "status": "available",
+      "url": "/schedual_app_pages/app/"
+    },
+    "macos": {
+      "kind": "pwa",
+      "status": "available",
+      "url": "/schedual_app_pages/app/"
+    },
+    "android": {
+      "kind": "pwa",
+      "status": "available",
+      "url": "/schedual_app_pages/app/"
+    },
+    "ios": {
+      "kind": "pwa",
+      "status": "available",
+      "url": "/schedual_app_pages/app/"
+    },
+    "linux": {
+      "kind": "pwa",
+      "status": "available",
+      "url": "/schedual_app_pages/app/"
+    }
+  },
+  "futureEntitlements": [
+    "online-sync",
+    "ai-scheduling"
+  ]
+}

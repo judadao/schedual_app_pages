@@ -1,0 +1,1 @@
+{"version":"0.31.0","androidVersionCode":31000,"apiContract":1,"notes":["新增 GitHub Pages 產品首頁、線上 Demo、完整 PWA 與作業系統下載入口。","Demo 使用正式月班表介面，可調整班別或休假後執行智慧最佳化。","Demo 固定 3 名正職、3 名半職、3 名兼職、少量班別與分散特休。","受限功能保留介面並引導下載；回首頁與所有對話框關閉控制可直接操作。"],"revision":"95572e8edae9","builtAt":"2026-09-11T12:24:31.254Z","buildId":"7718153e-aef1-4e15-a188-50339b57943e","channel":"release"}

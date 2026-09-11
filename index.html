@@ -1,25 +1,53 @@
 <!doctype html>
 <html lang="zh-Hant">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#245477" />
-    <meta name="description" content="可完全離線使用的小型團隊排班工具" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Rosterly" />
-    <link rel="icon" href="/schedual_app_pages/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/schedual_app_pages/apple-touch-icon.png" />
-    <title>Rosterly 排班</title>
-    <script type="module" crossorigin src="/schedual_app_pages/assets/index-DKvtn30-.js"></script>
-    <link rel="stylesheet" crossorigin href="/schedual_app_pages/assets/index-CatxSv4-.css">
-    <link rel="modulepreload" crossorigin="" href="/schedual_app_pages/assets/offlineBootstrap-B1frh-zp.js">
-    <link rel="modulepreload" crossorigin="" href="/schedual_app_pages/assets/index-DMOQgkFO.js">
-    <link rel="modulepreload" crossorigin="" href="/schedual_app_pages/assets/index-DKvtn30-.js">
-    <link rel="modulepreload" crossorigin="" href="/schedual_app_pages/assets/stateRepository-B55eIVLc.js">
-    <link rel="modulepreload" crossorigin="" href="/schedual_app_pages/assets/dailyGroupLimits-DrYJYxtI.js">
-    <link rel="modulepreload" crossorigin="" href="/schedual_app_pages/assets/configApi-BU3lrvXR.js">
-    <link rel="modulepreload" crossorigin="" href="/schedual_app_pages/assets/csv-DQYOfuOc.js">
-  <link rel="manifest" href="/schedual_app_pages/manifest.webmanifest"></head>
-  <body><div id="root"></div></body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#17384d">
+    <meta name="description" content="Rosterly 智慧排班：先在線上 Demo 體驗，再安裝可離線使用的完整版本。">
+    <link rel="icon" href="./schedule/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./site.css">
+  <title>Rosterly｜智慧排班，留更多時間給團隊</title>
+</head>
+<body>
+  <header class="site-nav">
+    <a class="wordmark" href="./"><span>R</span>Rosterly</a>
+    <nav aria-label="主要導覽"><a href="#features">功能</a><a href="./schedule/">線上 Demo</a><a class="nav-cta" href="./download/">下載完整版本</a></nav>
+  </header>
+  <main>
+    <section class="landing-hero">
+      <div class="hero-copy">
+        <p class="kicker">ROSTERING, MADE CLEAR</p>
+        <h1>把排班交給規則，<br><em>把時間留給團隊。</em></h1>
+        <p class="hero-lead">Rosterly 把人力需求、員工工時、不可排日期與營業時間一起算進去。先用一張範例班表體驗，再把完整版本安裝到自己的裝置。</p>
+        <div class="hero-actions"><a class="button primary" href="./schedule/">試用智慧排班 <span>→</span></a><a class="button secondary" href="./download/">下載完整版本</a></div>
+        <p class="trust-line"><span>✓ 無需註冊即可試用</span><span>✓ 完整 PWA 可離線運作</span><span>✓ 資料留在你的裝置</span></p>
+      </div>
+      <div class="product-preview" aria-label="智慧排班畫面預覽">
+        <div class="preview-bar"><i></i><i></i><i></i><span>智慧排班結果</span><b>已完成</b></div>
+        <div class="preview-grid">
+          <div class="preview-label">員工</div><div>一<br><small>9/14</small></div><div>二<br><small>9/15</small></div><div>三<br><small>9/16</small></div><div>四<br><small>9/17</small></div><div>五<br><small>9/18</small></div>
+          <strong>陳怡君</strong><mark>AB<br><small>08:00–17:30</small></mark><span>休</span><mark>BC<br><small>12:00–21:30</small></mark><mark>AB<br><small>08:00–17:30</small></mark><span>休</span>
+          <strong>王柏翔</strong><span>休</span><mark>AB<br><small>08:00–17:30</small></mark><mark>AC<br><small>分段班</small></mark><span>休</span><mark>BC<br><small>12:00–21:30</small></mark>
+          <strong>李佳蓉</strong><mark>BC<br><small>12:00–21:30</small></mark><mark>AC<br><small>分段班</small></mark><span>休</span><mark>BC<br><small>12:00–21:30</small></mark><mark>AB<br><small>08:00–17:30</small></mark>
+        </div>
+        <div class="preview-note"><span>✦</span><p><b>人力需求已補足</b><br><small>自動避開 3 個不可排日期，工時分配在設定範圍內。</small></p></div>
+      </div>
+    </section>
+
+    <section class="choice-section" id="features">
+        <div class="section-heading"><p class="kicker">CHOOSE YOUR EXPERIENCE</p><h2>先看效果，再開始使用</h2><p>Demo 可改班別與休假再智慧排班；完整版本提供真正的日常排班工作區。</p></div>
+      <div class="choice-grid">
+          <article class="choice-card demo-card"><span class="card-number">01</span><p class="card-tag">免安裝</p><h3>線上 Demo</h3><p>用正式班表介面調整格子裡的班別或休假，再看智慧最佳化如何完成整月班表。</p><ul><li>3 正職、3 半職、3 兼職與固定特休</li><li>班表格子與智慧排班可互動</li><li>其他功能保留介面並引導下載</li></ul><a href="./schedule/">開啟 Demo <span>→</span></a></article>
+        <article class="choice-card full-card"><span class="card-number">02</span><p class="card-tag">完整功能</p><h3>安裝完整 PWA</h3><p>建立自己的門市、員工、班型與多張班表。安裝後可像一般應用程式開啟，也能離線使用。</p><ul><li>不限範例班表的完整工作區</li><li>編輯、驗證、版本、發布與備份</li><li>Windows、macOS、Android、iOS、Linux</li></ul><a href="./download/">前往下載 <span>→</span></a></article>
+      </div>
+    </section>
+
+    <section class="future-section">
+      <div><p class="kicker">COMING NEXT</p><h2>進階能力，準備好再開啟</h2><p>完整版本保留本機核心功能。未來的線上同步與 AI 排班助理會在登入並取得方案授權後開啟，尚未授權時清楚反灰顯示。</p></div>
+      <div class="future-cards"><article><span>🔒</span><b>線上同步</b><small>跨裝置與團隊協作</small></article><article><span>🔒</span><b>AI 排班助理</b><small>以自然語言調整排班</small></article></div>
+    </section>
+  </main>
+  <footer><a class="wordmark" href="./"><span>R</span>Rosterly</a><p>更清楚、更可靠的排班工作區。</p><div><a href="./schedule/">Demo</a><a href="./download/">下載</a></div></footer>
+</body>
 </html>
