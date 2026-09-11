@@ -1,18 +1,21 @@
 {
   "schemaVersion": 1,
-  "version": "0.31.1",
-  "buildId": "723d82e9-7e0e-43cf-9a60-10a68da5e56c",
-  "revision": "d68562acbe45",
-  "generatedAt": "2026-09-11T12:31:59.728Z",
+  "version": "0.32.0",
+  "buildId": "7f7059d2-6051-46c5-a3ed-004a8c845d69",
+  "revision": "5b1d3fb1658d",
+  "generatedAt": "2026-09-11T14:20:04.215Z",
   "fullPwa": {
     "status": "available",
     "url": "/schedual_app_pages/app/"
   },
   "platforms": {
     "windows": {
-      "kind": "pwa",
+      "kind": "installer",
       "status": "available",
-      "url": "/schedual_app_pages/app/"
+      "architecture": "x64",
+      "bytes": 94567324,
+      "sha256": "cac0dcc65e061e23667e4d4f4c85036eb2fea72902341c16965e16ec3ecf2dce",
+      "url": "/schedual_app_pages/releases/Rosterly-Setup-0.32.0-x64.exe"
     },
     "macos": {
       "kind": "pwa",
