@@ -2291,6 +2291,40 @@ paths:
                   type: string
                 password:
                   type: string
+  /api/invitations/preview:
+    post:
+      operationId: saas_POST__api_invitations_preview
+      parameters:
+        - name: X-CSRF-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Cookie-bound token returned by GET /api/auth/csrf.
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - saas
+      summary: POST /api/invitations/preview
+      x-source: apps/api/src/server.ts
+      security:
+        - sessionCookie: []
+          csrfToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+              required:
+                - token
   /api/me/assignments:
     get:
       operationId: saas_GET__api_me_assignments
@@ -2371,6 +2405,8 @@ paths:
               properties:
                 store_id:
                   type: string
+                version_id:
+                  type: string
   /api/me/calendar:
     get:
       operationId: saas_GET__api_me_calendar
@@ -2387,6 +2423,42 @@ paths:
       x-source: apps/api/src/server.ts
       security:
         - sessionCookie: []
+  /api/me/calendar/read:
+    post:
+      operationId: saas_POST__api_me_calendar_read
+      parameters:
+        - name: X-CSRF-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Cookie-bound token returned by GET /api/auth/csrf.
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - saas
+      summary: POST /api/me/calendar/read
+      x-source: apps/api/src/server.ts
+      security:
+        - sessionCookie: []
+          csrfToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                version_ids:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - version_ids
   /api/me/email-deliveries:
     get:
       operationId: saas_GET__api_me_email_deliveries
@@ -12729,6 +12801,86 @@ paths:
       security:
         - sessionCookie: []
           csrfToken: []
+  /api/scheduling/stores/{storeId}/profile/preview:
+    post:
+      operationId: saas_scheduling_POST__api_scheduling_stores__storeId__profile_preview
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-CSRF-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Cookie-bound token returned by GET /api/auth/csrf.
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: store.profile.preview
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: store.profile.preview
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+      security:
+        - sessionCookie: []
+          csrfToken: []
   /api/scheduling/stores/{storeId}/schedule-periods:
     get:
       operationId: saas_scheduling_GET__api_scheduling_stores__storeId__schedule_periods
@@ -13603,6 +13755,166 @@ paths:
       summary: store.shift-templates.create
       description: "Access: MANAGER. Workload: SHORT. "
       x-operation-name: store.shift-templates.create
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+      security:
+        - sessionCookie: []
+          csrfToken: []
+  /api/scheduling/stores/{storeId}/shift-templates/import:
+    post:
+      operationId: saas_scheduling_POST__api_scheduling_stores__storeId__shift_templates_import
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-CSRF-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Cookie-bound token returned by GET /api/auth/csrf.
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: store.shift-templates.import
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: store.shift-templates.import
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: saas-scheduling
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+      security:
+        - sessionCookie: []
+          csrfToken: []
+  /api/scheduling/stores/{storeId}/shift-templates/import/preview:
+    post:
+      operationId: saas_scheduling_POST__api_scheduling_stores__storeId__shift_templates_import_preview
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-CSRF-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Cookie-bound token returned by GET /api/auth/csrf.
+        - name: X-Rosterly-Store-Id
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: If-Match
+          in: header
+          required: false
+          schema:
+            type: string
+          description: Expected store revision; stale values return 409.
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas-scheduling
+      summary: store.shift-templates.preview
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: store.shift-templates.preview
       x-access: MANAGER
       x-workload: SHORT
       x-runtime: saas-scheduling
@@ -15048,6 +15360,60 @@ paths:
                 - type: object
                 - type: array
               x-domain-validation: domain-use-case
+  /api/stores/{storeId}/profile/preview:
+    post:
+      operationId: local_POST__api_stores__storeId__profile_preview
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: store.profile.preview
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: store.profile.preview
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
   /api/stores/{storeId}/roster:
     get:
       operationId: saas_GET__api_stores__storeId__roster
@@ -16059,10 +16425,14 @@ paths:
                                             - type: boolean
                                         acknowledged_at:
                                           type: string
+                                        acknowledgement_note:
+                                          type: string
                                       required:
                                         - reason
                                         - message
                                     acknowledged_at:
+                                      type: string
+                                    note:
                                       type: string
                                   required:
                                     - fingerprint
@@ -16107,6 +16477,22 @@ paths:
                                 items:
                                   type: object
                                   properties:
+                                    assignment_id:
+                                      type: number
+                                    start_time:
+                                      type: string
+                                    end_time:
+                                      type: string
+                                    second_start_time:
+                                      anyOf:
+                                        - type: "null"
+                                        - type: string
+                                    second_end_time:
+                                      anyOf:
+                                        - type: "null"
+                                        - type: string
+                                    break_minutes:
+                                      type: number
                                     employee_id:
                                       type: number
                                     employee_name:
@@ -16176,6 +16562,22 @@ paths:
                                         items:
                                           type: object
                                           properties:
+                                            assignment_id:
+                                              type: number
+                                            start_time:
+                                              type: string
+                                            end_time:
+                                              type: string
+                                            second_start_time:
+                                              anyOf:
+                                                - type: "null"
+                                                - type: string
+                                            second_end_time:
+                                              anyOf:
+                                                - type: "null"
+                                                - type: string
+                                            break_minutes:
+                                              type: number
                                             employee_id:
                                               type: number
                                             employee_name:
@@ -17410,10 +17812,14 @@ paths:
                                         - type: boolean
                                     acknowledged_at:
                                       type: string
+                                    acknowledgement_note:
+                                      type: string
                                   required:
                                     - reason
                                     - message
                                 acknowledged_at:
+                                  type: string
+                                note:
                                   type: string
                               required:
                                 - fingerprint
@@ -17458,6 +17864,22 @@ paths:
                             items:
                               type: object
                               properties:
+                                assignment_id:
+                                  type: number
+                                start_time:
+                                  type: string
+                                end_time:
+                                  type: string
+                                second_start_time:
+                                  anyOf:
+                                    - type: "null"
+                                    - type: string
+                                second_end_time:
+                                  anyOf:
+                                    - type: "null"
+                                    - type: string
+                                break_minutes:
+                                  type: number
                                 employee_id:
                                   type: number
                                 employee_name:
@@ -17527,6 +17949,22 @@ paths:
                                     items:
                                       type: object
                                       properties:
+                                        assignment_id:
+                                          type: number
+                                        start_time:
+                                          type: string
+                                        end_time:
+                                          type: string
+                                        second_start_time:
+                                          anyOf:
+                                            - type: "null"
+                                            - type: string
+                                        second_end_time:
+                                          anyOf:
+                                            - type: "null"
+                                            - type: string
+                                        break_minutes:
+                                          type: number
                                         employee_id:
                                           type: number
                                         employee_name:
@@ -18578,6 +19016,114 @@ paths:
       summary: store.shift-templates.create
       description: "Access: MANAGER. Workload: SHORT. "
       x-operation-name: store.shift-templates.create
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+  /api/stores/{storeId}/shift-templates/import:
+    post:
+      operationId: local_POST__api_stores__storeId__shift_templates_import
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: store.shift-templates.import
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: store.shift-templates.import
+      x-access: MANAGER
+      x-workload: SHORT
+      x-runtime: local
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - type: object
+                - type: array
+              x-domain-validation: domain-use-case
+  /api/stores/{storeId}/shift-templates/import/preview:
+    post:
+      operationId: local_POST__api_stores__storeId__shift_templates_import_preview
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation result
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+        "409":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - local
+      summary: store.shift-templates.preview
+      description: "Access: MANAGER. Workload: SHORT. "
+      x-operation-name: store.shift-templates.preview
       x-access: MANAGER
       x-workload: SHORT
       x-runtime: local
