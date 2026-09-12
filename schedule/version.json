@@ -1,1 +1,0 @@
-{"version":"0.33.7","androidVersionCode":33007,"apiContract":1,"notes":["強化公開網站的代理信任、請求限流與逾時，過量請求在存取資料庫前拒絕。","更新伺服器容器安全套件，加強 HTTPS、安全標頭與敏感檔案防護。","保留登入後進入我的工作區與每頁側欄返回入口。"],"revision":"ffd988e02736","builtAt":"2026-09-12T03:55:54.513Z","buildId":"06fe9fd5-e010-44fd-9a62-2d9dbc7a9cd1","channel":"release"}

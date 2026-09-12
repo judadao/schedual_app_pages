@@ -1,45 +1,9 @@
 {
   "schemaVersion": 1,
-  "version": "0.33.7",
-  "buildId": "786100ec-5d36-4556-b312-bab8f18ff448",
-  "revision": "ffd988e02736",
-  "generatedAt": "2026-09-12T03:57:26.713Z",
+  "status": "development",
+  "downloadsEnabled": false,
+  "platforms": {},
   "fullPwa": {
-    "status": "available",
-    "url": "/schedual_app_pages/app/"
-  },
-  "platforms": {
-    "windows": {
-      "kind": "installer",
-      "status": "available",
-      "architecture": "x64",
-      "bytes": 94931381,
-      "sha256": "ade26e0a7985c3f86868cbd9cdd702b39773694af8e5ecd306b7b3a1a4354515",
-      "url": "/schedual_app_pages/releases/Rosterly-Setup-0.33.7-x64.exe"
-    },
-    "macos": {
-      "kind": "pwa",
-      "status": "available",
-      "url": "/schedual_app_pages/app/"
-    },
-    "android": {
-      "kind": "pwa",
-      "status": "available",
-      "url": "/schedual_app_pages/app/"
-    },
-    "ios": {
-      "kind": "pwa",
-      "status": "available",
-      "url": "/schedual_app_pages/app/"
-    },
-    "linux": {
-      "kind": "pwa",
-      "status": "available",
-      "url": "/schedual_app_pages/app/"
-    }
-  },
-  "futureEntitlements": [
-    "online-sync",
-    "ai-scheduling"
-  ]
+    "status": "unavailable"
+  }
 }
