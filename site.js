@@ -23,7 +23,7 @@ fetch('../releases/manifest.json', { cache: 'no-store' }).then(response => respo
   const target = selected?.url || release.fullPwa?.url
   const link = document.querySelector('[data-install-link]')
   document.querySelector('[data-version]').textContent = `目前版本 v${release.version} · ${selected?.kind === 'installer' ? 'Windows x64 安裝程式' : '完整 PWA'}`
-  if (target) link.href = target
+  if (target) link.href = selected?.kind === 'installer' ? target : `${target}?install=1`
   if (selected?.kind === 'installer') {
     link.innerHTML = '下載 Windows 安裝檔 <span>↓</span>'
     link.setAttribute('download', '')
@@ -31,4 +31,4 @@ fetch('../releases/manifest.json', { cache: 'no-store' }).then(response => respo
     document.querySelector('[data-step-one-copy]').textContent = '下載 Rosterly-Setup 安裝檔，不需要先開啟網頁工作區。'
     document.querySelector('[data-step-two-title]').textContent = '執行安裝或升級'
   }
-}).catch(() => { document.querySelector('[data-version]').textContent = '版本資訊暫時無法讀取，仍可開啟完整 PWA。' })
+}).catch(() => { document.querySelector('[data-version]').textContent = '版本資訊暫時無法讀取；可使用 PWA 安裝頁，或稍後重試下載。' })

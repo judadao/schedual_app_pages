@@ -2509,6 +2509,74 @@ paths:
       security:
         - sessionCookie: []
           csrfToken: []
+  /api/me/email-verification/code:
+    post:
+      operationId: saas_POST__api_me_email_verification_code
+      parameters:
+        - name: X-CSRF-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Cookie-bound token returned by GET /api/auth/csrf.
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - saas
+      summary: POST /api/me/email-verification/code
+      x-source: apps/api/src/routes/workspaceRoutes.ts
+      security:
+        - sessionCookie: []
+          csrfToken: []
+  /api/me/email-verification/code/confirm:
+    post:
+      operationId: saas_POST__api_me_email_verification_code_confirm
+      parameters:
+        - name: X-CSRF-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Cookie-bound token returned by GET /api/auth/csrf.
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+        "400":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas
+      summary: POST /api/me/email-verification/code/confirm
+      x-source: apps/api/src/routes/workspaceRoutes.ts
+      security:
+        - sessionCookie: []
+          csrfToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+              required:
+                - code
   /api/me/google:
     delete:
       operationId: saas_DELETE__api_me_google
@@ -2899,6 +2967,45 @@ paths:
               properties:
                 token:
                   type: string
+  /api/me/store-subscriptions/{storeId}:
+    delete:
+      operationId: saas_DELETE__api_me_store_subscriptions__storeId_
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-CSRF-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Cookie-bound token returned by GET /api/auth/csrf.
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+        "204":
+          description: Completed; no response body
+      tags:
+        - saas
+      summary: DELETE /api/me/store-subscriptions/:storeId
+      x-source: apps/api/src/server.ts
+      security:
+        - sessionCookie: []
+          csrfToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                confirmed_name:
+                  type: string
   /api/me/subscriptions:
     get:
       operationId: saas_GET__api_me_subscriptions
@@ -2915,6 +3022,50 @@ paths:
       x-source: apps/api/src/server.ts
       security:
         - sessionCookie: []
+  /api/me/workspaces:
+    post:
+      operationId: saas_POST__api_me_workspaces
+      parameters:
+        - name: X-CSRF-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Cookie-bound token returned by GET /api/auth/csrf.
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+        "201":
+          description: Successful operation result
+      tags:
+        - saas
+      summary: POST /api/me/workspaces
+      x-source: apps/api/src/routes/workspaceRoutes.ts
+      security:
+        - sessionCookie: []
+          csrfToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              required:
+                - store_name
+              properties:
+                organization_name:
+                  maxLength: 120
+                  type: string
+                store_name:
+                  maxLength: 120
+                  type: string
+                timezone:
+                  maxLength: 100
+                  type: string
   /api/openapi.yaml:
     get:
       operationId: saas_GET__api_openapi_yaml
@@ -14667,6 +14818,58 @@ paths:
                 - type: object
                 - type: array
               x-domain-validation: domain-use-case
+    delete:
+      operationId: saas_DELETE__api_stores__storeId_
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-CSRF-Token
+          in: header
+          required: true
+          schema:
+            type: string
+          description: Cookie-bound token returned by GET /api/auth/csrf.
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+        "401":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas
+      summary: DELETE /api/stores/:storeId
+      x-source: apps/api/src/routes/storeDeletionRoutes.ts
+      security:
+        - sessionCookie: []
+          csrfToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                confirmed_name:
+                  type: string
+                fingerprint:
+                  type: string
+              required:
+                - confirmed_name
+                - fingerprint
   /api/stores/{storeId}/business-hours:
     get:
       operationId: local_GET__api_stores__storeId__business_hours
@@ -14765,6 +14968,38 @@ paths:
                 - type: object
                 - type: array
               x-domain-validation: domain-use-case
+  /api/stores/{storeId}/deletion-preview:
+    get:
+      operationId: saas_GET__api_stores__storeId__deletion_preview
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Business response DTO
+          content:
+            application/json:
+              schema: {}
+        "401":
+          description: Rejected request; inspect detail/code. No successful write is implied.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                  code:
+                    type: string
+      tags:
+        - saas
+      summary: GET /api/stores/:storeId/deletion-preview
+      x-source: apps/api/src/routes/storeDeletionRoutes.ts
+      security:
+        - sessionCookie: []
   /api/stores/{storeId}/employee-access:
     get:
       operationId: saas_GET__api_stores__storeId__employee_access
@@ -15429,6 +15664,8 @@ paths:
           content:
             application/json:
               schema: {}
+        "304":
+          description: Successful operation result
         "401":
           description: Rejected request; inspect detail/code. No successful write is implied.
           content:
@@ -16869,6 +17106,8 @@ paths:
                         next_ids:
                           type: object
                           properties:
+                            store:
+                              type: number
                             employee:
                               type: number
                             shift:
@@ -18256,6 +18495,8 @@ paths:
                     next_ids:
                       type: object
                       properties:
+                        store:
+                          type: number
                         employee:
                           type: number
                         shift:
